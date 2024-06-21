@@ -16,5 +16,30 @@ namespace StudentsPerformancePredictionTool_CW1.Forms
         {
             InitializeComponent();
         }
+
+        private void btnAddStudySession_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnAddBreakSession_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnViewReport_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnPredictGrades_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textName_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
