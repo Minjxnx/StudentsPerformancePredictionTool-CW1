@@ -1,4 +1,5 @@
-﻿using System;
+﻿using StudentsPerformancePredictionTool_CW1.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,9 +13,11 @@ namespace StudentsPerformancePredictionTool_CW1.Forms
 {
     public partial class AddStudySessionForm : Form
     {
-        public AddStudySessionForm()
+        private User user;
+        public AddStudySessionForm(User user)
         {
             InitializeComponent();
+            this.user = user;
         }
     }
 }
