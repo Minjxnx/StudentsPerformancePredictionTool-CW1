@@ -116,6 +116,7 @@
             this.txtHours.Name = "txtHours";
             this.txtHours.Size = new System.Drawing.Size(179, 34);
             this.txtHours.TabIndex = 11;
+            this.txtHours.TextChanged += new System.EventHandler(this.txtHours_TextChanged);
             // 
             // txtSubject
             // 
@@ -124,6 +125,7 @@
             this.txtSubject.Name = "txtSubject";
             this.txtSubject.Size = new System.Drawing.Size(179, 34);
             this.txtSubject.TabIndex = 12;
+            this.txtSubject.TextChanged += new System.EventHandler(this.txtHours_TextChanged);
             // 
             // dataGridViewSessions
             // 

@@ -22,6 +22,7 @@ namespace StudentsPerformancePredictionTool_CW1.Forms
             // Initialize DataGridView
             InitializeDataGridView();
             LoadStudySessions();
+            UpdateButtonStates();
         }
 
         private void InitializeDataGridView()
@@ -39,12 +40,14 @@ namespace StudentsPerformancePredictionTool_CW1.Forms
             // Handle row selection manually
             dataGridViewSessions.ClearSelection();
             dataGridViewSessions.CellClick += dataGridViewSessions_CellClick;
+            dataGridViewSessions.SelectionChanged += dataGridViewSessions_SelectionChanged;
         }
 
         private void LoadStudySessions()
         {
             dataGridViewSessions.DataSource = new BindingList<StudySession>(user.StudySessions);
             dataGridViewSessions.ClearSelection();
+            UpdateButtonStates();
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -98,6 +101,7 @@ namespace StudentsPerformancePredictionTool_CW1.Forms
                     txtSubject.Text = selectedSession.Subject;
                 }
             }
+            UpdateButtonStates();
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
@@ -125,6 +129,7 @@ namespace StudentsPerformancePredictionTool_CW1.Forms
                     dataGridViewSessions.ClearSelection();
                 }
             }
+            UpdateButtonStates();
         }
 
         private void dataGridViewSessions_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -139,6 +144,7 @@ namespace StudentsPerformancePredictionTool_CW1.Forms
                     txtSubject.Text = selectedSession.Subject;
                 }
             }
+            UpdateButtonStates();
         }
 
         private void ClearFields()
@@ -146,6 +152,7 @@ namespace StudentsPerformancePredictionTool_CW1.Forms
             dateTimePicker.Value = DateTime.Now;
             txtHours.Clear();
             txtSubject.Clear();
+            UpdateButtonStates();
         }
 
         protected override void OnActivated(EventArgs e)
@@ -153,6 +160,7 @@ namespace StudentsPerformancePredictionTool_CW1.Forms
             base.OnActivated(e);
             ClearFields();
             dataGridViewSessions.ClearSelection();
+            UpdateButtonStates();
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
@@ -175,11 +183,28 @@ namespace StudentsPerformancePredictionTool_CW1.Forms
             {
                 MessageBox.Show("Please select a study session to delete.");
             }
+            UpdateButtonStates();
         }
 
         private void btnBack_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void UpdateButtonStates()
+        {
+            bool rowSelected = dataGridViewSessions.SelectedRows.Count > 0;
+            bool fieldsFilled = !string.IsNullOrWhiteSpace(txtHours.Text) && !string.IsNullOrWhiteSpace(txtSubject.Text);
+
+            btnSave.Enabled = !rowSelected && fieldsFilled;
+            btnEdit.Enabled = rowSelected && fieldsFilled;
+            btnDelete.Enabled = rowSelected;
+            btnBack.Enabled = true;
+        }
+
+        private void txtHours_TextChanged(object sender, EventArgs e)
+        {
+            UpdateButtonStates();
         }
     }
 }
