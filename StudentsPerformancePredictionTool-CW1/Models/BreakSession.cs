@@ -11,10 +11,5 @@ namespace StudentsPerformancePredictionTool_CW1.Models
         public DateTime Date { get; set; }
         public double Hours { get; set; }
 
-        public BreakSession(DateTime date, double hours)
-        {
-            Date = date;
-            Hours = hours;
-        }
     }
 }

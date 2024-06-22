@@ -12,12 +12,5 @@ namespace StudentsPerformancePredictionTool_CW1.Models
         public double Hours { get; set; }
         public string Subject { get; set; }
 
-        public StudySession(DateTime date, double hours, string subject)
-        {
-            Date = date;
-            Hours = hours;
-            Subject = subject;
-        }
-
     }
 }
