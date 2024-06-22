@@ -36,14 +36,19 @@
             this.dateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.txtHours = new System.Windows.Forms.TextBox();
             this.txtSubject = new System.Windows.Forms.TextBox();
+            this.dataGridViewSessions = new System.Windows.Forms.DataGridView();
+            this.btnEdit = new System.Windows.Forms.Button();
+            this.btnDelete = new System.Windows.Forms.Button();
+            this.btnBack = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSessions)).BeginInit();
             this.SuspendLayout();
             // 
             // btnSave
             // 
-            this.btnSave.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.btnSave.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
             this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSave.Location = new System.Drawing.Point(627, 373);
+            this.btnSave.Location = new System.Drawing.Point(66, 355);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(161, 65);
             this.btnSave.TabIndex = 0;
@@ -59,9 +64,9 @@
             this.label1.Location = new System.Drawing.Point(178, 21);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(431, 62);
+            this.label1.Size = new System.Drawing.Size(538, 62);
             this.label1.TabIndex = 5;
-            this.label1.Text = "Add Study Session";
+            this.label1.Text = "Manage Study Sessions";
             // 
             // label3
             // 
@@ -120,12 +125,67 @@
             this.txtSubject.Size = new System.Drawing.Size(179, 34);
             this.txtSubject.TabIndex = 12;
             // 
+            // dataGridViewSessions
+            // 
+            this.dataGridViewSessions.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewSessions.Location = new System.Drawing.Point(754, 85);
+            this.dataGridViewSessions.Name = "dataGridViewSessions";
+            this.dataGridViewSessions.RowHeadersWidth = 51;
+            this.dataGridViewSessions.RowTemplate.Height = 24;
+            this.dataGridViewSessions.Size = new System.Drawing.Size(465, 240);
+            this.dataGridViewSessions.TabIndex = 13;
+            this.dataGridViewSessions.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewSessions_CellClick);
+            this.dataGridViewSessions.SelectionChanged += new System.EventHandler(this.dataGridViewSessions_SelectionChanged);
+            // 
+            // btnEdit
+            // 
+            this.btnEdit.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            this.btnEdit.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnEdit.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnEdit.Location = new System.Drawing.Point(233, 355);
+            this.btnEdit.Name = "btnEdit";
+            this.btnEdit.Size = new System.Drawing.Size(161, 65);
+            this.btnEdit.TabIndex = 14;
+            this.btnEdit.Text = "Edit";
+            this.btnEdit.UseVisualStyleBackColor = false;
+            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
+            // 
+            // btnDelete
+            // 
+            this.btnDelete.BackColor = System.Drawing.Color.Red;
+            this.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnDelete.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDelete.Location = new System.Drawing.Point(400, 355);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(161, 65);
+            this.btnDelete.TabIndex = 15;
+            this.btnDelete.Text = "Delete";
+            this.btnDelete.UseVisualStyleBackColor = false;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+            // 
+            // btnBack
+            // 
+            this.btnBack.BackColor = System.Drawing.Color.Silver;
+            this.btnBack.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnBack.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnBack.Location = new System.Drawing.Point(567, 355);
+            this.btnBack.Name = "btnBack";
+            this.btnBack.Size = new System.Drawing.Size(161, 65);
+            this.btnBack.TabIndex = 16;
+            this.btnBack.Text = "Back";
+            this.btnBack.UseVisualStyleBackColor = false;
+            this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
+            // 
             // AddStudySessionForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(1267, 450);
+            this.Controls.Add(this.btnBack);
+            this.Controls.Add(this.btnDelete);
+            this.Controls.Add(this.btnEdit);
+            this.Controls.Add(this.dataGridViewSessions);
             this.Controls.Add(this.txtSubject);
             this.Controls.Add(this.txtHours);
             this.Controls.Add(this.dateTimePicker);
@@ -136,6 +196,7 @@
             this.Controls.Add(this.btnSave);
             this.Name = "AddStudySessionForm";
             this.Text = "AddStudySessionForm";
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSessions)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -151,5 +212,9 @@
         private System.Windows.Forms.DateTimePicker dateTimePicker;
         private System.Windows.Forms.TextBox txtHours;
         private System.Windows.Forms.TextBox txtSubject;
+        private System.Windows.Forms.DataGridView dataGridViewSessions;
+        private System.Windows.Forms.Button btnEdit;
+        private System.Windows.Forms.Button btnDelete;
+        private System.Windows.Forms.Button btnBack;
     }
 }
