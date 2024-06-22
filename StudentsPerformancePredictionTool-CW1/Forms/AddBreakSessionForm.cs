@@ -19,5 +19,37 @@ namespace StudentsPerformancePredictionTool_CW1.Forms
             InitializeComponent();
             this.user = user;
         }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            if (dateTimePicker.Value == null)
+            {
+                MessageBox.Show("Please add the date!");
+            }
+            else if (string.IsNullOrWhiteSpace(txtHours.Text))
+            {
+                MessageBox.Show("Please add the hours!");
+            }
+            else
+            {
+                double hours;
+                if (!double.TryParse(txtHours.Text, out hours))
+                {
+                    MessageBox.Show("Please enter a valid number for hours!");
+                    return;
+                }
+
+                var breakSession = new BreakSession
+                {
+                    Date = dateTimePicker.Value,
+                    Hours = hours
+                };
+
+                user.BreakSessions.Add(breakSession);
+                MessageBox.Show("Break session added successfully!");
+                this.Close();
+            }
+            
+        }
     }
 }
