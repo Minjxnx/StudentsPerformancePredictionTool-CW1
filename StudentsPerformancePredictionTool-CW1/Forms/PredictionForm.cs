@@ -18,6 +18,29 @@ namespace StudentsPerformancePredictionTool_CW1.Forms
         {
             InitializeComponent();
             this.user = user;
+            PredictGrades();
+        }
+
+        private void PredictGrades()
+        {
+           
+            var predictedGrades = new Dictionary<string, double>();
+
+            foreach (var session in user.StudySessions)
+            {
+                if (!predictedGrades.ContainsKey(session.Subject))
+                    predictedGrades[session.Subject] = 0;
+
+                predictedGrades[session.Subject] += session.Hours * 0.1;
+            }
+
+            var predictionReport = new StringBuilder();
+            foreach (var subject in predictedGrades.Keys)
+            {
+                predictionReport.AppendLine($"{subject}: {predictedGrades[subject]:F2}");
+            }
+
+            txtPrediction.Text = predictionReport.ToString();
         }
     }
 }
