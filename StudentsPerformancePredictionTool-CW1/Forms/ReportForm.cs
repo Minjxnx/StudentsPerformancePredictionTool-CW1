@@ -18,47 +18,92 @@ namespace StudentsPerformancePredictionTool_CW1.Forms
         {
             InitializeComponent();
             this.user = user;
-            GenerateReport();
+            InitializeCustomComponents();
+            LoadInitialReport();
         }
 
-        private void GenerateReport()
+        private void InitializeCustomComponents()
         {
-            var report = new StringBuilder();
+            // Initialize the DataGridView columns
+            dataGridViewReport.Columns.Add("Date", "Date");
+            dataGridViewReport.Columns.Add("StudyHours", "Study Hours");
+            dataGridViewReport.Columns.Add("StudySessions", "Study Sessions");
+            dataGridViewReport.Columns.Add("BreakHours", "Break Hours");
+            dataGridViewReport.Columns.Add("BreakSessions", "Break Sessions");
+
+            // Set default date range to the last 7 days
+            dateTimePickerTo.Value = DateTime.Today;
+            dateTimePickerFrom.Value = DateTime.Today.AddDays(-6);
+
+            // Add event handler for the button click
+            dateTimePickerFrom.ValueChanged += dateTimePickerFrom_ValueChanged;
+            dateTimePickerTo.ValueChanged += dateTimePickerTo_ValueChanged;
+        }
+
+        private void LoadInitialReport()
+        {
+            var endDate = DateTime.Today;
+            var startDate = DateTime.Today.AddDays(-6);
+            GenerateReport(startDate, endDate);
+        }
+
+        private void dateTimePickerFrom_ValueChanged(object sender, EventArgs e)
+        {
+            var startDate = dateTimePickerFrom.Value.Date;
+            var endDate = dateTimePickerTo.Value.Date;
+            GenerateReport(startDate, endDate);
+        }
+
+        private void dateTimePickerTo_ValueChanged(object sender, EventArgs e)
+        {
+            var startDate = dateTimePickerFrom.Value.Date;
+            var endDate = dateTimePickerTo.Value.Date;
+            GenerateReport(startDate, endDate);
+        }
+
+        private void GenerateReport(DateTime startDate, DateTime endDate)
+        {
+            // Clear the existing rows
+            dataGridViewReport.Rows.Clear();
+
+            // Get study and break sessions grouped by date
             var groupedStudySessions = user.StudySessions
+                .Where(s => s.Date.Date >= startDate && s.Date.Date <= endDate)
                 .GroupBy(s => s.Date.Date)
-                .ToDictionary(g => g.Key, g => g.Sum(s => s.Hours));
+                .ToDictionary(g => g.Key, g => new { Hours = g.Sum(s => s.Hours), Count = g.Count() });
 
             var groupedBreakSessions = user.BreakSessions
+                .Where(b => b.Date.Date >= startDate && b.Date.Date <= endDate)
                 .GroupBy(b => b.Date.Date)
-                .ToDictionary(g => g.Key, g => g.Sum(b => b.Hours));
+                .ToDictionary(g => g.Key, g => new { Hours = g.Sum(b => b.Hours), Count = g.Count() });
 
-            foreach (var day in Enumerable.Range(0, 7))
+            // Populate the DataGridView with data
+            foreach (var day in EachDay(startDate, endDate))
             {
-                var date = DateTime.Today.AddDays(-day);
-                report.AppendLine($"{date.ToShortDateString()}:");
-
-                double studyHours;
-                if (groupedStudySessions.TryGetValue(date.Date, out studyHours))
+                double studyHours = 0;
+                int studySessions = 0;
+                if (groupedStudySessions.TryGetValue(day, out var studyData))
                 {
-                    report.AppendLine($"  Study: {studyHours} hours");
-                }
-                else
-                {
-                    report.AppendLine("  Study: 0 hours");
+                    studyHours = studyData.Hours;
+                    studySessions = studyData.Count;
                 }
 
-                double breakHours;
-                if (groupedBreakSessions.TryGetValue(date.Date, out breakHours))
+                double breakHours = 0;
+                int breakSessions = 0;
+                if (groupedBreakSessions.TryGetValue(day, out var breakData))
                 {
-                    report.AppendLine($"  Break: {breakHours} hours");
+                    breakHours = breakData.Hours;
+                    breakSessions = breakData.Count;
                 }
-                else
-                {
-                    report.AppendLine("  Break: 0 hours");
-                }
+
+                dataGridViewReport.Rows.Add(day.ToShortDateString(), studyHours, studySessions, breakHours, breakSessions);
             }
+        }
 
-            txtReport.Text = report.ToString();
+        private IEnumerable<DateTime> EachDay(DateTime from, DateTime to)
+        {
+            for (var day = from.Date; day.Date <= to.Date; day = day.AddDays(1))
+                yield return day;
         }
     }
 }
