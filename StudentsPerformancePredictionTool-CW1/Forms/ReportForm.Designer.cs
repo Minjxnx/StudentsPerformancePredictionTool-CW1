@@ -34,6 +34,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.dateTimePickerFrom = new System.Windows.Forms.DateTimePicker();
             this.dateTimePickerTo = new System.Windows.Forms.DateTimePicker();
+            this.btnBack = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewReport)).BeginInit();
             this.SuspendLayout();
             // 
@@ -99,12 +100,26 @@
             this.dateTimePickerTo.TabIndex = 12;
             this.dateTimePickerTo.ValueChanged += new System.EventHandler(this.dateTimePickerTo_ValueChanged);
             // 
+            // btnBack
+            // 
+            this.btnBack.BackColor = System.Drawing.Color.Silver;
+            this.btnBack.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnBack.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnBack.Location = new System.Drawing.Point(574, 511);
+            this.btnBack.Name = "btnBack";
+            this.btnBack.Size = new System.Drawing.Size(161, 65);
+            this.btnBack.TabIndex = 17;
+            this.btnBack.Text = "Back";
+            this.btnBack.UseVisualStyleBackColor = false;
+            this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
+            // 
             // ReportForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.ClientSize = new System.Drawing.Size(800, 509);
+            this.ClientSize = new System.Drawing.Size(800, 607);
+            this.Controls.Add(this.btnBack);
             this.Controls.Add(this.dateTimePickerTo);
             this.Controls.Add(this.dateTimePickerFrom);
             this.Controls.Add(this.label2);
@@ -128,5 +143,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.DateTimePicker dateTimePickerFrom;
         private System.Windows.Forms.DateTimePicker dateTimePickerTo;
+        private System.Windows.Forms.Button btnBack;
     }
 }

@@ -105,5 +105,10 @@ namespace StudentsPerformancePredictionTool_CW1.Forms
             for (var day = from.Date; day.Date <= to.Date; day = day.AddDays(1))
                 yield return day;
         }
+
+        private void btnBack_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

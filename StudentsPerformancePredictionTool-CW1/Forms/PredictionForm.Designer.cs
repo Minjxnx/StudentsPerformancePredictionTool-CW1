@@ -29,8 +29,9 @@
         private void InitializeComponent()
         {
             this.label1 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.txtPrediction = new System.Windows.Forms.Label();
+            this.dataGridViewPredictions = new System.Windows.Forms.DataGridView();
+            this.btnBack = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPredictions)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -45,38 +46,41 @@
             this.label1.TabIndex = 8;
             this.label1.Text = "Prediction";
             // 
-            // label3
+            // dataGridViewPredictions
             // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(96, 216);
-            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(122, 29);
-            this.label3.TabIndex = 9;
-            this.label3.Text = "Prediction";
+            this.dataGridViewPredictions.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewPredictions.Location = new System.Drawing.Point(100, 88);
+            this.dataGridViewPredictions.Name = "dataGridViewPredictions";
+            this.dataGridViewPredictions.RowHeadersWidth = 51;
+            this.dataGridViewPredictions.RowTemplate.Height = 24;
+            this.dataGridViewPredictions.Size = new System.Drawing.Size(598, 320);
+            this.dataGridViewPredictions.TabIndex = 9;
             // 
-            // txtPrediction
+            // btnBack
             // 
-            this.txtPrediction.AutoSize = true;
-            this.txtPrediction.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPrediction.Location = new System.Drawing.Point(258, 216);
-            this.txtPrediction.Name = "txtPrediction";
-            this.txtPrediction.Size = new System.Drawing.Size(79, 29);
-            this.txtPrediction.TabIndex = 10;
-            this.txtPrediction.Text = "label2";
+            this.btnBack.BackColor = System.Drawing.Color.Silver;
+            this.btnBack.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnBack.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnBack.Location = new System.Drawing.Point(537, 430);
+            this.btnBack.Name = "btnBack";
+            this.btnBack.Size = new System.Drawing.Size(161, 65);
+            this.btnBack.TabIndex = 17;
+            this.btnBack.Text = "Back";
+            this.btnBack.UseVisualStyleBackColor = false;
+            this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
             // 
             // PredictionForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.txtPrediction);
-            this.Controls.Add(this.label3);
+            this.ClientSize = new System.Drawing.Size(800, 507);
+            this.Controls.Add(this.btnBack);
+            this.Controls.Add(this.dataGridViewPredictions);
             this.Controls.Add(this.label1);
             this.Name = "PredictionForm";
             this.Text = "PredictionForm";
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPredictions)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -85,7 +89,7 @@
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label txtPrediction;
+        private System.Windows.Forms.DataGridView dataGridViewPredictions;
+        private System.Windows.Forms.Button btnBack;
     }
 }
