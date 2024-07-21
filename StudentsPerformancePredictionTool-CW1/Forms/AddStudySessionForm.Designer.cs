@@ -136,7 +136,6 @@
             this.dataGridViewSessions.RowTemplate.Height = 24;
             this.dataGridViewSessions.Size = new System.Drawing.Size(465, 240);
             this.dataGridViewSessions.TabIndex = 13;
-            this.dataGridViewSessions.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewSessions_CellClick);
             this.dataGridViewSessions.SelectionChanged += new System.EventHandler(this.dataGridViewSessions_SelectionChanged);
             // 
             // btnEdit
