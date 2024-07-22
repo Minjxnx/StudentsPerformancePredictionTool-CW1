@@ -114,7 +114,6 @@
             this.dataGridViewBreaks.RowTemplate.Height = 24;
             this.dataGridViewBreaks.Size = new System.Drawing.Size(310, 240);
             this.dataGridViewBreaks.TabIndex = 14;
-            this.dataGridViewBreaks.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewBreaks_CellClick);
             this.dataGridViewBreaks.SelectionChanged += new System.EventHandler(this.dataGridViewBreaks_SelectionChanged);
             // 
             // btnEdit
