@@ -53,6 +53,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Connected Services\PredictionService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Connected Services\ReportService\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -132,6 +137,13 @@
     <None Include="Connected Services\BreakSessionService\StudentsPerformancePredictionTool_CW1.BreakSessionService.GetBreakSessionsResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Connected Services\PredictionService\Prediction.wsdl" />
+    <None Include="Connected Services\PredictionService\StudentsPerformancePredictionTool_CW1.PredictionService.PredictGradesResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\PredictionService\StudentsPerformancePredictionTool_CW1.PredictionService.PredictionModel.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Connected Services\ReportService\Report.wsdl" />
     <None Include="Connected Services\ReportService\StudentsPerformancePredictionTool_CW1.ReportService.GenerateReportResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
@@ -167,6 +179,7 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadataStorage Include="Connected Services\BreakSessionService\" />
+    <WCFMetadataStorage Include="Connected Services\PredictionService\" />
     <WCFMetadataStorage Include="Connected Services\ReportService\" />
     <WCFMetadataStorage Include="Connected Services\StudySessionService\" />
   </ItemGroup>
@@ -202,6 +215,18 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Connected Services\ReportService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\PredictionService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\PredictionService\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\PredictionService\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>

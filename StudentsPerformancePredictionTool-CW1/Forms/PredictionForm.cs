@@ -14,10 +14,12 @@ namespace StudentsPerformancePredictionTool_CW1.Forms
     public partial class PredictionForm : Form
     {
         private User user;
+        private PredictionService.PredictionSoapClient predictionService;
         public PredictionForm(User user)
         {
             InitializeComponent();
             this.user = user;
+            predictionService = new PredictionService.PredictionSoapClient();
             InitializeCustomComponents();
             PredictGrades();
         }
@@ -34,64 +36,80 @@ namespace StudentsPerformancePredictionTool_CW1.Forms
         private void PredictGrades()
         {
 
-            var predictedGrades = new Dictionary<string, double>();
+            // Clear the existing rows
+            dataGridViewPredictions.Rows.Clear();
 
-            foreach (var session in user.StudySessions)
-            {
-                if (!predictedGrades.ContainsKey(session.Subject))
-                    predictedGrades[session.Subject] = 0;
-
-                // Assuming each hour contributes 0.1 to the grade with diminishing returns after 10 hours
-                if (session.Hours <= 10)
-                {
-                    predictedGrades[session.Subject] += session.Hours * 0.1;
-                }
-                else
-                {
-                    predictedGrades[session.Subject] += 10 * 0.1 + (session.Hours - 10) * 0.05;
-                }
-            }
-
-            // Cap grades at 100
-            foreach (var subject in predictedGrades.Keys.ToList())
-            {
-                predictedGrades[subject] = Math.Min(predictedGrades[subject], 100);
-            }
+            // Call the web service to get the predicted grades
+            var predictions = predictionService.PredictGrades(user.Name);
 
             // Populate the DataGridView with data
-            foreach (var subject in predictedGrades.Keys)
+            foreach (var prediction in predictions)
             {
-                double predictedGrade = predictedGrades[subject];
-                double hoursToPass = CalculateRequiredHours(predictedGrade, 50);
-                double hoursToDistinction = CalculateRequiredHours(predictedGrade, 75);
-
-                dataGridViewPredictions.Rows.Add(subject, predictedGrade.ToString("F2"), hoursToPass, hoursToDistinction);
+                dataGridViewPredictions.Rows.Add(prediction.Subject, prediction.PredictedGrade.ToString("F2"), prediction.HoursToPass, prediction.HoursToDistinction);
             }
         }
 
-        private double CalculateRequiredHours(double currentGrade, double targetGrade)
-        {
-            if (currentGrade >= targetGrade)
-            {
-                return 0;
-            }
+        //private void PredictGrades()
+        //{
 
-            double additionalGradeNeeded = targetGrade - currentGrade;
-            double additionalHours;
+        //    var predictedGrades = new Dictionary<string, double>();
 
-            if (currentGrade < 10)
-            {
-                additionalHours = additionalGradeNeeded / 0.1;
-            }
-            else
-            {
-                additionalHours = (10 - currentGrade) / 0.1;
-                additionalGradeNeeded -= (10 - currentGrade);
-                additionalHours += additionalGradeNeeded / 0.05;
-            }
+        //    foreach (var session in user.StudySessions)
+        //    {
+        //        if (!predictedGrades.ContainsKey(session.Subject))
+        //            predictedGrades[session.Subject] = 0;
 
-            return additionalHours;
-        }
+        //        // Assuming each hour contributes 0.1 to the grade with diminishing returns after 10 hours
+        //        if (session.Hours <= 10)
+        //        {
+        //            predictedGrades[session.Subject] += session.Hours * 0.1;
+        //        }
+        //        else
+        //        {
+        //            predictedGrades[session.Subject] += 10 * 0.1 + (session.Hours - 10) * 0.05;
+        //        }
+        //    }
+
+        //    // Cap grades at 100
+        //    foreach (var subject in predictedGrades.Keys.ToList())
+        //    {
+        //        predictedGrades[subject] = Math.Min(predictedGrades[subject], 100);
+        //    }
+
+        //    // Populate the DataGridView with data
+        //    foreach (var subject in predictedGrades.Keys)
+        //    {
+        //        double predictedGrade = predictedGrades[subject];
+        //        double hoursToPass = CalculateRequiredHours(predictedGrade, 50);
+        //        double hoursToDistinction = CalculateRequiredHours(predictedGrade, 75);
+
+        //        dataGridViewPredictions.Rows.Add(subject, predictedGrade.ToString("F2"), hoursToPass, hoursToDistinction);
+        //    }
+        //}
+
+        //private double CalculateRequiredHours(double currentGrade, double targetGrade)
+        //{
+        //    if (currentGrade >= targetGrade)
+        //    {
+        //        return 0;
+        //    }
+
+        //    double additionalGradeNeeded = targetGrade - currentGrade;
+        //    double additionalHours;
+
+        //    if (currentGrade < 10)
+        //    {
+        //        additionalHours = additionalGradeNeeded / 0.1;
+        //    }
+        //    else
+        //    {
+        //        additionalHours = (10 - currentGrade) / 0.1;
+        //        additionalGradeNeeded -= (10 - currentGrade);
+        //        additionalHours += additionalGradeNeeded / 0.05;
+        //    }
+
+        //    return additionalHours;
+        //}
 
         private void btnBack_Click(object sender, EventArgs e)
         {
